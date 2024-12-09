@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c34r57qhumdm"]
+
+[ext_resource type="Script" path="res://scenes/TestMoveScript.gd" id="1_ccarv"]
+[ext_resource type="PackedScene" uid="uid://bce7p2t5f4q3x" path="res://robot_arm_root_test.tscn" id="2_fy0vu"]
+
+[node name="Robot" type="Node3D"]
+script = ExtResource("1_ccarv")
+
+[node name="RobotArmRoot" parent="." instance=ExtResource("2_fy0vu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

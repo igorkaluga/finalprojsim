@@ -1,0 +1,127 @@
+[gd_scene load_steps=12 format=3 uid="uid://bce7p2t5f4q3x"]
+
+[ext_resource type="Script" path="res://robot_arm.gd" id="1_5tb3a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kl3ej"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ok4sb"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hs22f"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_igvki"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e0rvm"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vnu1x"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6leks"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c0eoc"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0dvjy"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6c4w8"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="RobotArmRoot" type="Node3D"]
+script = ExtResource("1_5tb3a")
+
+[node name="Base" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base"]
+mesh = SubResource("BoxMesh_kl3ej")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base"]
+shape = SubResource("BoxShape3D_ok4sb")
+
+[node name="BaseJoint" type="HingeJoint3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.3, 0)
+node_a = NodePath("Shoulder")
+node_b = NodePath("..")
+
+[node name="Shoulder" type="RigidBody3D" parent="Base/BaseJoint"]
+transform = Transform3D(1, 0, 4.44089e-16, 0, 1, 0, -1.11022e-16, 0, 1, 0, 0, 0)
+collision_layer = 128
+collision_mask = 16
+
+[node name="ShoulderMesh" type="MeshInstance3D" parent="Base/BaseJoint/Shoulder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, -1.66533e-16, -1, -4.37114e-08, 2.77535e-17, -1.20178e-08, -0.274934)
+mesh = SubResource("BoxMesh_hs22f")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/BaseJoint/Shoulder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -1.11022e-16, 0, 1, -1.41537e-17, 1.77636e-15, -0.275)
+shape = SubResource("BoxShape3D_igvki")
+
+[node name="ShoulderJoint" type="HingeJoint3D" parent="Base/BaseJoint/Shoulder"]
+transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, -2.63915e-05, 0.00213903, -0.520056)
+node_a = NodePath("Arm1")
+node_b = NodePath("..")
+solver_priority = 2
+
+[node name="Arm1" type="RigidBody3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint"]
+transform = Transform3D(1, 0, 0, -9.31192e-23, 1, -6.20385e-25, 0, 0, 1, 0.00674396, 0.760309, -0.546506)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Arm1Mesh" type="MeshInstance3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1"]
+transform = Transform3D(1, 0, 0, -4.017e-23, 1, -4.1359e-25, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_e0rvm")
+
+[node name="Arm1Collision" type="CollisionShape3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1"]
+shape = SubResource("BoxShape3D_vnu1x")
+
+[node name="ElbowJoint" type="HingeJoint3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.9139e-08, 0.828901, 0)
+node_a = NodePath("..")
+node_b = NodePath("Arm2")
+solver_priority = 3
+
+[node name="Arm2" type="RigidBody3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint"]
+transform = Transform3D(1, 1.23002e-14, 7.10543e-15, -1.61215e-14, 1, -7.10543e-15, -7.10543e-15, 7.10543e-15, 1, -0.0517639, 0.716649, -0.579064)
+collision_layer = 532488
+collision_mask = 532488
+
+[node name="Arm2Mesh" type="MeshInstance3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2"]
+mesh = SubResource("BoxMesh_6leks")
+
+[node name="Arm2Collision" type="CollisionShape3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2"]
+shape = SubResource("BoxShape3D_c0eoc")
+
+[node name="EF_joint" type="Generic6DOFJoint3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2"]
+transform = Transform3D(1, 3.36164e-14, 1.77636e-14, -3.74378e-14, 1, -1.77636e-14, -1.77636e-14, 1.77636e-14, 1, -8.9407e-08, 0.92531, -3.53903e-08)
+node_a = NodePath("..")
+node_b = NodePath("EF")
+
+[node name="EF" type="RigidBody3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2/EF_joint"]
+transform = Transform3D(1, 4.78273e-14, 2.4869e-14, -5.16487e-14, 1, -2.4869e-14, -2.4869e-14, 2.4869e-14, 1, 0, 0, 0)
+collision_layer = 128
+collision_mask = 128
+
+[node name="EF" type="Area3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2"]
+collision_layer = 129
+collision_mask = 129
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2/EF"]
+transform = Transform3D(1, 9.04599e-14, 4.61853e-14, -9.42812e-14, 1, -4.61853e-14, -4.61853e-14, 4.61853e-14, 1, -8.9407e-08, 0.92531, -3.53903e-08)
+mesh = SubResource("BoxMesh_0dvjy")
+skeleton = NodePath("../../EF_joint/EF")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2/EF"]
+transform = Transform3D(1, 9.04599e-14, 4.61853e-14, -9.42812e-14, 1, -4.61853e-14, -4.61853e-14, 4.61853e-14, 1, -8.9407e-08, 0.92531, -3.53903e-08)
+shape = SubResource("BoxShape3D_6c4w8")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Base/BaseJoint/Shoulder/ShoulderJoint/Arm1/ElbowJoint/Arm2/EF"]
+transform = Transform3D(1, -1.91069e-15, 0, -1.91069e-15, 1, 0, 0, 0, 1, -7.82311e-08, 0.894649, -3.91155e-08)
+solver_priority = 5

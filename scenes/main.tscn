@@ -1,0 +1,376 @@
+[gd_scene load_steps=18 format=3 uid="uid://d2nvrx3pf86v7"]
+
+[ext_resource type="Script" path="res://scenes/PanelScript.gd" id="1_d7q00"]
+[ext_resource type="PackedScene" uid="uid://b0dgw21s8iw2r" path="res://TestMenu.tscn" id="2_kxvs1"]
+[ext_resource type="Script" path="res://scenes/SubViewportScript.gd" id="3_0uhfh"]
+[ext_resource type="PackedScene" uid="uid://bce7p2t5f4q3x" path="res://robot_arm_root_test.tscn" id="4_sio1j"]
+[ext_resource type="Script" path="res://scenes/CarryObjectScript.gd" id="5_m84ea"]
+[ext_resource type="Script" path="res://scenes/GoalAreaScript.gd" id="6_o5f8w"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hfio7"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6k2a"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_afatl"]
+size = Vector3(1000, 0, 1000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oknjf"]
+size = Vector3(1000, 0, 1000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e3lp7"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n2285"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5tpgo"]
+height = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vxfd7"]
+bottom_radius = 0.0
+height = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x4gub"]
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_xfhx6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cr4wg"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 591.0
+offset_bottom = 723.0
+script = ExtResource("1_d7q00")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 590.0
+offset_right = 1283.0
+offset_bottom = 721.0
+texture = SubResource("ViewportTexture_hfio7")
+
+[node name="VectorControls" type="VBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 166.0
+offset_right = 389.0
+offset_bottom = 421.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Control2" parent="Panel/VectorControls" instance=ExtResource("2_kxvs1")]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" parent="Panel/VectorControls/Control2/Panel" index="0"]
+custom_minimum_size = Vector2(300, 0)
+offset_top = 24.0
+offset_right = 304.0
+offset_bottom = 241.0
+
+[node name="Label" parent="Panel/VectorControls/Control2/Panel/VBoxContainer" index="0"]
+text = "3D Vector Controls"
+horizontal_alignment = 1
+
+[node name="Button2" parent="Panel/VectorControls/Control2/Panel/VBoxContainer" index="1"]
+visible = false
+
+[node name="Label" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(200, 0)
+text = "X COORDINATE
+Position:"
+
+[node name="LineEdit" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer" index="1"]
+custom_minimum_size = Vector2(100, 0)
+
+[node name="Label" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer2" index="0"]
+custom_minimum_size = Vector2(200, 0)
+text = "Y COORDINATE
+Position:"
+
+[node name="LineEdit" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer2" index="1"]
+custom_minimum_size = Vector2(100, 0)
+
+[node name="Label" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(200, 0)
+text = "Z COORDINATE
+Position:"
+
+[node name="LineEdit" parent="Panel/VectorControls/Control2/Panel/VBoxContainer/HBoxContainer3" index="1"]
+custom_minimum_size = Vector2(100, 0)
+
+[node name="lesson_container" type="VBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 79.0
+offset_right = 380.0
+offset_bottom = 509.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Label" type="Label" parent="Panel/lesson_container"]
+layout_mode = 2
+text = "Information"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/lesson_container"]
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+fit_content = true
+
+[node name="Button" type="Button" parent="Panel/lesson_container"]
+layout_mode = 2
+text = "Continue"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 23.0
+offset_right = 522.0
+offset_bottom = 63.0
+scale = Vector2(1.2, 1.2)
+theme_override_constants/separation = 30
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3D Vector Control"
+
+[node name="Button2" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Free Control"
+
+[node name="Button3" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Levels"
+
+[node name="UIControls" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 228.0
+offset_right = 298.0
+offset_bottom = 348.0
+scale = Vector2(2, 2)
+
+[node name="Label2" type="Label" parent="Panel/UIControls"]
+layout_mode = 2
+text = "UI Controls"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/UIControls"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/UIControls/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/UIControls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Base"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Left"
+
+[node name="Button2" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Right"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/UIControls/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/UIControls/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Shoulder"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "+"
+
+[node name="Button2" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "-"
+
+[node name="Button3" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "release"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/UIControls/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/UIControls/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Elbow"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "+"
+
+[node name="Button2" type="Button" parent="Panel/UIControls/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "-"
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1190.0
+offset_top = 17.0
+offset_right = 1241.0
+offset_bottom = 48.0
+scale = Vector2(1.5, 1.5)
+text = "Reset"
+
+[node name="LevelsContainer" type="HBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 93.0
+offset_top = 132.0
+offset_right = 379.0
+offset_bottom = 172.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 50
+
+[node name="Button" type="Button" parent="Panel/LevelsContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Button2" type="Button" parent="Panel/LevelsContainer"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Button3" type="Button" parent="Panel/LevelsContainer"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="LevelCompleted" type="VBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 822.0
+offset_top = 332.0
+offset_right = 1031.0
+offset_bottom = 390.0
+scale = Vector2(1.3, 1.3)
+
+[node name="Label" type="Label" parent="Panel/LevelCompleted"]
+layout_mode = 2
+text = "Good job! Level completed."
+
+[node name="Button" type="Button" parent="Panel/LevelCompleted"]
+layout_mode = 2
+text = "Continue"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+script = ExtResource("3_0uhfh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(0.0743663, 0.99268, -0.0951679, -0.325965, 0.114387, 0.938436, 0.942452, -0.0387666, 0.332086, -0.235198, 6.77448, -0.090059)
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.5
+directional_shadow_split_1 = 0.18
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 0.422618, -0.906308, 0, 0.906308, 0.422618, 1, 1.84732e-08, -3.9616e-08, -4.5, 4, 0)
+
+[node name="RobotArmRoot" parent="SubViewport" instance=ExtResource("4_sio1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/StaticBody3D"]
+mesh = SubResource("BoxMesh_x6k2a")
+
+[node name="floor" type="StaticBody3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+collision_layer = 24576
+collision_mask = 24576
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/floor"]
+mesh = SubResource("BoxMesh_afatl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/floor"]
+shape = SubResource("BoxShape3D_oknjf")
+
+[node name="CarryObject" type="RigidBody3D" parent="SubViewport"]
+visible = false
+collision_layer = 1597569
+collision_mask = 1597569
+can_sleep = false
+linear_damp = 3.0
+angular_damp = 3.0
+script = ExtResource("5_m84ea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/CarryObject"]
+shape = SubResource("BoxShape3D_e3lp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/CarryObject"]
+mesh = SubResource("BoxMesh_n2285")
+
+[node name="LevelGoal" type="StaticBody3D" parent="SubViewport"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -100, 0)
+collision_layer = 524288
+collision_mask = 524288
+script = ExtResource("6_o5f8w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/LevelGoal"]
+shape = SubResource("CylinderShape3D_5tpgo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/LevelGoal"]
+mesh = SubResource("CylinderMesh_vxfd7")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="SubViewport/LevelGoal"]
+collision_layer = 1048577
+collision_mask = 1048577
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/LevelGoal/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.02132, 0)
+shape = SubResource("CylinderShape3D_x4gub")
+
+[node name="Platform" type="StaticBody3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+visible = false
+collision_layer = 524289
+collision_mask = 524289
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Platform"]
+mesh = SubResource("BoxMesh_xfhx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Platform"]
+shape = SubResource("BoxShape3D_cr4wg")
+
+[connection signal="pressed" from="Panel/lesson_container/Button" to="Panel" method="_lesson_continue_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button" to="Panel" method="on_3d_vector_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button" to="SubViewport/RobotArmRoot" method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="Panel" method="_on_ui_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="SubViewport/RobotArmRoot" method="_on_ui_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button3" to="Panel" method="_on_levels_pressed"]
+[connection signal="button_down" from="Panel/UIControls/HBoxContainer/VBoxContainer/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_right"]
+[connection signal="button_up" from="Panel/UIControls/HBoxContainer/VBoxContainer/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_up"]
+[connection signal="button_down" from="Panel/UIControls/HBoxContainer/VBoxContainer2/Button" to="SubViewport/RobotArmRoot" method="_on_button_button_shoulder_up"]
+[connection signal="button_up" from="Panel/UIControls/HBoxContainer/VBoxContainer2/Button" to="SubViewport/RobotArmRoot" method="_on_button_button_up_shoulder_up"]
+[connection signal="button_down" from="Panel/UIControls/HBoxContainer/VBoxContainer2/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_down_shoulder_down"]
+[connection signal="button_up" from="Panel/UIControls/HBoxContainer/VBoxContainer2/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_up_shoulder_down"]
+[connection signal="button_down" from="Panel/UIControls/HBoxContainer/VBoxContainer3/Button" to="SubViewport/RobotArmRoot" method="_on_button_button_down"]
+[connection signal="button_up" from="Panel/UIControls/HBoxContainer/VBoxContainer3/Button" to="SubViewport/RobotArmRoot" method="_on_button_button_up_elbow_up"]
+[connection signal="button_down" from="Panel/UIControls/HBoxContainer/VBoxContainer3/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_down_elbow_down"]
+[connection signal="button_up" from="Panel/UIControls/HBoxContainer/VBoxContainer3/Button2" to="SubViewport/RobotArmRoot" method="_on_button_2_button_up_elbow_down"]
+[connection signal="pressed" from="Panel/Button" to="Panel" method="_on_robot_reset"]
+[connection signal="pressed" from="Panel/Button" to="SubViewport/CarryObject" method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/LevelsContainer/Button" to="Panel" method="_on_select_lvl_1"]
+[connection signal="pressed" from="Panel/LevelsContainer/Button2" to="Panel" method="_on_select_lvl_2"]
+[connection signal="pressed" from="Panel/LevelsContainer/Button2" to="SubViewport/CarryObject" method="_on_select_lvl_2"]
+[connection signal="pressed" from="Panel/LevelsContainer/Button3" to="Panel" method="_on_select_lvl_3"]
+[connection signal="pressed" from="Panel/LevelCompleted/Button" to="Panel" method="_on_button_pressed"]
+
+[editable path="Panel/VectorControls/Control2"]
